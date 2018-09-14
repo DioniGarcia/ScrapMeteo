@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ScrapMeteo</string>
+    <string name="textbydefault">TextByDefault</string>
+    <string name="press_me">Press me!</string>
+    <string name="empty">Empty</string>
+    <string name="prezs_me">PreZs Me!</string>
+    <string name="todo">TODO</string>
+    <string name="registros_de_lluvia_diarios">Registros de lluvia diarios</string>
+</resources>
