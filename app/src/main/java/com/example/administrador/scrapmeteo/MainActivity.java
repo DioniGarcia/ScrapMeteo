@@ -3,15 +3,17 @@ package com.example.administrador.scrapmeteo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 public class MainActivity extends AppCompatActivity {
-    TextView texVista, texXodos, texAdz,texVf,texValde, texVm,texAr, texAlc, texTor, texPue, texMos, texMon, texBron;
+    TextView texVista, texXodos, texAdz,texVf,texValde, texVm, texOnd, texAlc, texTor, texPue, texMos, texMon, texBron;
+    Button but;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         texVf = (TextView) findViewById(R.id.t4);
         texValde = (TextView) findViewById(R.id.t5);
         texVm = (TextView) findViewById(R.id.t6);
-        texAr = (TextView) findViewById(R.id.t7);
+        texOnd = (TextView) findViewById(R.id.t7);
         texAlc = (TextView) findViewById(R.id.t8);
         texTor = (TextView) findViewById(R.id.t9);
         texPue = (TextView) findViewById(R.id.t10);
@@ -32,15 +34,20 @@ public class MainActivity extends AppCompatActivity {
         texMon = (TextView) findViewById(R.id.t12);
         texBron = (TextView) findViewById(R.id.t13);
 
-        new doit().execute();
-        /*Button but = (Button) findViewById(R.id.b1);
+
+
+        but = (Button) findViewById(R.id.b1);
 
         but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new doit().execute();
+                finish();
+                startActivity(getIntent());
             }
-        });*/
+        });
+
+        new doit().execute();
+
     }
 
     public class doit extends AsyncTask<Void,Void,Void>{
@@ -52,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         String textIncomeVal;
         String textIncomeVm;
         String textIncomeAlc;
-        String textIncomeAr;
+        String textIncomeOnd;
         String textIncomePue;
         String textIncomeTor;
         String textIncomeMos;
@@ -213,27 +220,27 @@ public class MainActivity extends AppCompatActivity {
 
                 /* ________________________________________________________________________________*/
 
-                Document docAr= Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c02m014e40").get();
+                Document docOnd= Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c06m084e02").get();
 
-                textIncomeAr = docAr.getElementById("estacio").text();
-                textIncomeAr += "\n"+ "Humedad relativa: " + cutBeforeData( docAr.getElementById("hrel").text());
-                textIncomeAr += "   Viento: " + cutBeforeData( docAr.getElementById("vent").text());
-                textIncomeAr += "\n"+ "Lluvia: " + cutBeforeData( docAr.getElementById("prec").text() );
+                textIncomeOnd = docOnd.getElementById("estacio").text();
+                textIncomeOnd += "\n"+ "Humedad relativa: " + cutBeforeData( docOnd.getElementById("hrel").text());
+                textIncomeOnd += "   Viento: " + cutBeforeData( docOnd.getElementById("vent").text());
+                textIncomeOnd += "\n"+ "Lluvia: " + cutBeforeData( docOnd.getElementById("prec").text() );
                 i=0;
-                for (Element e : docAr.getElementById("mesdades").children()) {
+                for (Element e : docOnd.getElementById("mesdades").children()) {
                     if (i == 5 ) {
-                        textIncomeAr += "   Mensual: "+  cutBeforeData( e.text() );
+                        textIncomeOnd += "   Mensual: "+  cutBeforeData( e.text() );
 
                     }else if (i==6){
-                        textIncomeAr += "   Anual: "+  cutBeforeData( e.text() );
+                        textIncomeOnd += "   Anual: "+  cutBeforeData( e.text() );
                         break;
                     }
                     i+=1;
                 }
 
 
-                textIncomeAr += "\n"+ "T.Min: " + cutBeforeData( docAr.getElementById("temp_min").text() );
-                textIncomeAr += "   T.Max: " + cutBeforeData( docAr.getElementById("temp_max").text() );
+                textIncomeOnd += "\n"+ "T.Min: " + cutBeforeData( docOnd.getElementById("temp_min").text() );
+                textIncomeOnd += "   T.Max: " + cutBeforeData( docOnd.getElementById("temp_max").text() );
 
                 /* ________________________________________________________________________________*/
 
@@ -387,8 +394,8 @@ public class MainActivity extends AppCompatActivity {
                 textIncomeBron+= "\nViento: "+viento[1]+"km/h "+viento[0];
                 textIncomeBron+="   Lluvia: "+meteo[4];
                 textIncomeBron+="\nLluvia (Últimos 5 dias): "+meteo[5].split(" ")[0]+"mm";
-                textIncomeBron+= "\nT.Min: "+docBron.getElementsByClass("vermell").first().text();
-                textIncomeBron+= "   T.Max: "+docBron.getElementsByClass("blau").first().text();
+                textIncomeBron+= "\nT.Min: "+docBron.getElementsByClass("blau").first().text();
+                textIncomeBron+= "   T.Max: "+docBron.getElementsByClass("vermell").first().text();
 
                 /* ________________________________________________________________________________                   END     */
 
@@ -410,7 +417,7 @@ public class MainActivity extends AppCompatActivity {
             texValde.setText((textIncomeVal));
             texVm.setText((textIncomeVm));
             texAlc.setText((textIncomeAlc));
-            texAr.setText((textIncomeAr));
+            texOnd.setText((textIncomeOnd));
             texTor.setText((textIncomeTor));
             texPue.setText((textIncomePue));
             texMos.setText((textIncomeMos));
