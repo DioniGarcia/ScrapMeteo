@@ -434,6 +434,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
             }
+
+            if (orgData.charAt(idx-1) == '-'){
+                return orgData.substring(idx-1,orgData.length());
+            }
             return orgData.substring(idx,orgData.length());
         }
     }
