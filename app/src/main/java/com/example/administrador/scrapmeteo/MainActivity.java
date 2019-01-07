@@ -373,29 +373,15 @@ public class MainActivity extends AppCompatActivity {
                 textIncomeMon+="\nT.Min: "+meteo[1].split(" ")[0];
                 textIncomeMon+="   T.Max: "+meteo[0].split(" ")[0];
 
-                /* MeteoClimatic Bronchales________________________________________________________________________________*/
+                /* meteosabi.es________________________________________________________________________________*/
 
-                Document docBron = Jsoup.connect("https://www.meteoclimatic.net/perfil/ESARA4400000044367B").get();
-                titulo = docBron.getElementsByClass("titolseccio").text().split("-")[0];
+                Document docBron = Jsoup.connect("https://meteosabi.es/el-tiempo-en-bronchales-teruel").get();
+                titulo = "Bronchales (Camping)";
                 textIncomeBron = titulo;
-
-
-                meteo = new String[6];
-
-                idx=0;
-
-                for(Element e : docBron.getElementsByClass("dadesactuals")) {
-                    meteo[idx] = e.text();
-                    idx += 1;
-                }
-
-
-                String viento[] = {meteo[2].split(" ")[0],meteo[2].split(" ")[1]};
-                textIncomeBron+= "\nViento: "+viento[1]+"km/h "+viento[0];
-                textIncomeBron+="   Lluvia: "+meteo[4];
-                textIncomeBron+="\nLluvia (Últimos 5 dias): "+meteo[5].split(" ")[0]+"mm";
-                textIncomeBron+= "\nT.Min: "+docBron.getElementsByClass("blau").first().text();
-                textIncomeBron+= "   T.Max: "+docBron.getElementsByClass("vermell").first().text();
+                textIncomeBron+= "\nViento: "+docBron.getElementById("WindAverage").text()+"km/h";
+                textIncomeBron+="   Lluvia: "+docBron.getElementById("RainToday").text()+"mm";
+                textIncomeBron+= "\nT.Min: "+docBron.getElementById("LowTempToday").text();
+                textIncomeBron+= "   T.Max: "+docBron.getElementById("HighTempToday").text();
 
                 /* ________________________________________________________________________________                   END     */
 

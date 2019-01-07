@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/sbg"
+    android:orientation="vertical"
     android:paddingLeft="15dp"
+    android:paddingTop="15dp"
     android:paddingRight="15dp"
     android:paddingBottom="15dp"
-    android:paddingTop="15dp"
-    android:background="@drawable/rain"
-    android:orientation="vertical"
 
     tools:context=".MainActivity">
 
@@ -48,26 +48,24 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="25dp"
             android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
             android:gravity="center_vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/t1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:textSize="18sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -79,8 +77,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:textSize="18sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -90,8 +88,8 @@
                 android:id="@+id/t3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -101,8 +99,8 @@
                 android:id="@+id/t4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -112,8 +110,8 @@
                 android:id="@+id/t5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -123,8 +121,8 @@
                 android:id="@+id/t6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -134,8 +132,8 @@
                 android:id="@+id/t7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -145,8 +143,8 @@
                 android:id="@+id/t8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -156,8 +154,8 @@
                 android:id="@+id/t9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -167,8 +165,8 @@
                 android:id="@+id/t10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -179,7 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -190,7 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -201,7 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <Space
                 android:layout_width="match_parent"
