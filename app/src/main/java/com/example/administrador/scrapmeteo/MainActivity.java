@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 /* ________________________________________________________________________________*/
-
+/*
                 Document docVf = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c02m129e02").get();
 
                 textIncomeVf = docVf.getElementById("estacio").text();
@@ -169,6 +169,25 @@ public class MainActivity extends AppCompatActivity {
 
                 textIncomeVf += "\n"+ "T.Min: " + cutBeforeData( docVf.getElementById("temp_min").text() );
                 textIncomeVf += "   T.Max: " + cutBeforeData( docVf.getElementById("temp_max").text() );
+*/
+                Document docVf = Jsoup.connect("http://www.aemet.es/va/eltiempo/observacion/ultimosdatos?k=val&l=8489X&w=1&datos=img").get();
+                textIncomeVf = "Villafranca del cid";
+                String [] meteo = new String[6];
+
+
+                int idx=0;
+
+                for(Element e : docVf.getElementsByClass("fila_impar")){
+                    meteo[idx] = e.text();
+                    idx+=1;
+                }
+                textIncomeVf+= "\nViento: "+meteo[3].split(" ")[0]+"km/h";
+                textIncomeVf+="   Lluvia: "+meteo[4]+"mm";
+                textIncomeVf+="\nT.Min: "+meteo[1].split(" ")[0];
+                textIncomeVf+="   T.Max: "+meteo[0].split(" ")[0];
+
+
+
 
                 /* ________________________________________________________________________________*/
 
@@ -325,7 +344,7 @@ public class MainActivity extends AppCompatActivity {
                 Document docMos = Jsoup.connect("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=arn&l=8486X&w=1&datos=img").get();
                 String titulo = docMos.getElementsByClass("titulo").text();
 
-                int idx=0;
+                idx=0;
                 for(int j=20; j<titulo.length();j++){
                     if (titulo.charAt(j)==' '){
                         idx = j;
@@ -334,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 textIncomeMos = titulo.substring(20,idx);
 
-                String [] meteo = new String[6];
+                meteo = new String[6];
                 idx=0;
 
                 for(Element e : docMos.getElementsByClass("fila_impar")){
