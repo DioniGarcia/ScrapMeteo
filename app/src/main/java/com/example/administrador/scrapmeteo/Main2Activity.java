@@ -1,11 +1,22 @@
 package com.example.administrador.scrapmeteo;
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,6 +25,8 @@ import org.jsoup.nodes.Element;
 public class Main2Activity extends AppCompatActivity {
     TextView texVista, texXodos, texAdz,texVf,texValde, texVm, texOnd, texAlc, texTor, texPue, texMos, texMon, texBron;
     Button but;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +83,9 @@ public class Main2Activity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
+
+            GettingFB gFb = new GettingFB();
+            gFb.fillData();
 
             try{
                 int i = 0;
