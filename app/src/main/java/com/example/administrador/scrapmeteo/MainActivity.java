@@ -21,4 +21,9 @@ public class MainActivity extends AppCompatActivity {
         Intent next = new Intent(this, Main2Activity.class);
         startActivity(next);
     }
+
+    public void toTest(View view) {
+        Intent next = new Intent(this, Main3Activity.class);
+        startActivity(next);
+    }
 }

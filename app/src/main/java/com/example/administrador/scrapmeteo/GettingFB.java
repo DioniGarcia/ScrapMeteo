@@ -60,7 +60,7 @@ public class GettingFB {
 
                         rains = document.getData();
 
-                        Log.d(TAG,"twe_DONE!");
+                        Log.d(TAG,"twe_DONE_accediendo FB!!!!");
 
                         //Log.d(TAG,"twe_"+rains.toString());
 

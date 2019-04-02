@@ -3,6 +3,7 @@ package com.example.administrador.scrapmeteo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,6 +11,14 @@ import android.widget.Toast;
 
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
+import java.net.Proxy;
+import java.net.Socket;
+import java.net.SocketAddress;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,7 +34,7 @@ import org.jsoup.nodes.Element;
 public class Main2Activity extends AppCompatActivity {
     TextView texVista, texXodos, texAdz,texVf,texValde, texVm, texOnd, texAlc, texTor, texPue, texMos, texMon, texBron;
     Button but;
-
+    private static final String TAG = "Main2Activity";
 
 
     @Override
@@ -65,19 +74,19 @@ public class Main2Activity extends AppCompatActivity {
 
     public class doit extends AsyncTask<Void,Void,Void>{
 
-        String textIncomeVista;
-        String textIncomeXodos;
-        String textIncomeAtz;
-        String textIncomeVf;
-        String textIncomeVal;
-        String textIncomeVm;
-        String textIncomeAlc;
-        String textIncomeOnd;
-        String textIncomePue;
-        String textIncomeTor;
-        String textIncomeMos;
-        String textIncomeMon;
-        String textIncomeBron;
+        String textIncomeVista = "NOT WORKING";
+        String textIncomeXodos= "NOT WORKING";
+        String textIncomeAtz= "NOT WORKING";
+        String textIncomeVf= "NOT WORKING";
+        String textIncomeVal= "NOT WORKING";
+        String textIncomeVm= "NOT WORKING";
+        String textIncomeAlc= "NOT WORKING";
+        String textIncomeOnd= "NOT WORKING";
+        String textIncomePue= "NOT WORKING";
+        String textIncomeTor= "NOT WORKING";
+        String textIncomeMos= "NOT WORKING";
+        String textIncomeMon= "NOT WORKING";
+        String textIncomeBron= "NOT WORKING";
 
 
 
@@ -89,6 +98,7 @@ public class Main2Activity extends AppCompatActivity {
 
             try{
                 int i = 0;
+                String titulo="";
 
                 Document docVista = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c04m139e01").get();
 
@@ -114,7 +124,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-                /* ________________________________________________________________________________*/
+
 
                 Document docXodos = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c04m055e02").get();
 
@@ -138,7 +148,7 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeXodos += "\n"+ "T.Min: " + cutBeforeData( docXodos.getElementById("temp_min").text() );
                 textIncomeXodos += "   T.Max: " + cutBeforeData( docXodos.getElementById("temp_max").text() );
 
-                /* ________________________________________________________________________________*/
+
 
                 Document docAtz = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c04m001e02").get();
 
@@ -163,49 +173,9 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeAtz += "   T.Max: " + cutBeforeData( docAtz.getElementById("temp_max").text() );
 
 
-                /* ________________________________________________________________________________*/
-/*
-                Document docVf = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c02m129e02").get();
-
-                textIncomeVf = docVf.getElementById("estacio").text();
-                textIncomeVf += "\n"+ "Humedad relativa: " + cutBeforeData( docVf.getElementById("hrel").text());
-                textIncomeVf += "   Viento: " + cutBeforeData( docVf.getElementById("vent").text());
-                textIncomeVf += "\n"+ "Lluvia: " + cutBeforeData( docVf.getElementById("prec").text() );
-                i=0;
-                for (Element e : docVf.getElementById("mesdades").children()) {
-                    if (i == 5 ) {
-                        textIncomeVf += "   Mensual: "+  cutBeforeData( e.text() );
-
-                    }else if (i==6){
-                        textIncomeVf += "   Anual: "+  cutBeforeData( e.text() );
-                        break;
-                    }
-                    i+=1;
-                }
-
-                textIncomeVf += "\n"+ "T.Min: " + cutBeforeData( docVf.getElementById("temp_min").text() );
-                textIncomeVf += "   T.Max: " + cutBeforeData( docVf.getElementById("temp_max").text() );
-*/
-                Document docVf = Jsoup.connect("http://www.aemet.es/va/eltiempo/observacion/ultimosdatos?k=val&l=8489X&w=1&datos=img").get();
-                textIncomeVf = "Villafranca del cid";
-                String [] meteo = new String[6];
-
-
-                int idx=0;
-
-                for(Element e : docVf.getElementsByClass("fila_impar")){
-                    meteo[idx] = e.text();
-                    idx+=1;
-                }
-                textIncomeVf+= "\nViento: "+meteo[3].split(" ")[0]+"km/h";
-                textIncomeVf+="   Lluvia: "+meteo[4]+"mm";
-                textIncomeVf+="\nT.Min: "+meteo[1].split(" ")[0];
-                textIncomeVf+="   T.Max: "+meteo[0].split(" ")[0];
 
 
 
-
-                /* ________________________________________________________________________________*/
 
                 Document docVal = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c99m044e15").get();
 
@@ -229,7 +199,7 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeVal += "\n"+ "T.Min: " + cutBeforeData( docVal.getElementById("temp_min").text() );
                 textIncomeVal += "   T.Max: " + cutBeforeData( docVal.getElementById("temp_max").text() );
 
-                /* ________________________________________________________________________________*/
+
 
                 Document docVm = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c08m131e01").get();
 
@@ -253,7 +223,7 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeVm += "\n"+ "T.Min: " + cutBeforeData( docVm.getElementById("temp_min").text() );
                 textIncomeVm += "   T.Max: " + cutBeforeData( docVm.getElementById("temp_max").text() );
 
-                /* ________________________________________________________________________________*/
+
 
                 Document docOnd= Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c06m084e02").get();
 
@@ -277,7 +247,7 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeOnd += "\n"+ "T.Min: " + cutBeforeData( docOnd.getElementById("temp_min").text() );
                 textIncomeOnd += "   T.Max: " + cutBeforeData( docOnd.getElementById("temp_max").text() );
 
-                /* ________________________________________________________________________________*/
+
 
                 Document docAlc = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c99m044e01").get();
 
@@ -302,7 +272,7 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeAlc += "   T.Max: " + cutBeforeData( docAlc.getElementById("temp_max").text() );
 
 
-                /* ________________________________________________________________________________*/
+
 
                 Document docTor= Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c07m115e01").get();
 
@@ -326,7 +296,7 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeTor += "\n"+ "T.Min: " + cutBeforeData( docTor.getElementById("temp_min").text() );
                 textIncomeTor += "   T.Max: " + cutBeforeData( docTor.getElementById("temp_max").text() );
 
-                /* ________________________________________________________________________________*/
+
 
                 Document docPue = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c09m201e01").get();
 
@@ -354,11 +324,27 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
+                Document docVf = Jsoup.connect("http://www.aemet.es/va/eltiempo/observacion/ultimosdatos?k=val&l=8489X&w=1&datos=img").get();
+                textIncomeVf = "Villafranca del cid";
+                String [] meteo = new String[6];
 
-                /* AEMET Mosqueruela________________________________________________________________________________*/
+                int idx=0;
+
+                for(Element e : docVf.getElementsByClass("fila_impar")){
+                    meteo[idx] = e.text();
+                    idx+=1;
+                }
+                textIncomeVf+= "\nViento: "+meteo[3].split(" ")[0]+"km/h";
+                textIncomeVf+="   Lluvia: "+meteo[4]+"mm";
+                textIncomeVf+="\nT.Min: "+meteo[1].split(" ")[0];
+                textIncomeVf+="   T.Max: "+meteo[0].split(" ")[0];
+
+
+
+                // AEMET Mosqueruela
 
                 Document docMos = Jsoup.connect("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=arn&l=8486X&w=1&datos=img").get();
-                String titulo = docMos.getElementsByClass("titulo").text();
+                titulo = docMos.getElementsByClass("titulo").text();
 
                 idx=0;
                 for(int j=20; j<titulo.length();j++){
@@ -381,7 +367,7 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeMos+="\nT.Min: "+meteo[1].split(" ")[0];
                 textIncomeMos+="   T.Max: "+meteo[0].split(" ")[0];
 
-                /* AEMET Montanejos________________________________________________________________________________*/
+                // AEMET Montanejos________________________________________________________________________________
 
                 Document docMon = Jsoup.connect("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=val&l=8472A&w=1&datos=img&f=tmax").get();
                 titulo = docMon.getElementsByClass("titulo").text();
@@ -408,7 +394,7 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeMon+="\nT.Min: "+meteo[1].split(" ")[0];
                 textIncomeMon+="   T.Max: "+meteo[0].split(" ")[0];
 
-                /* meteosabi.es________________________________________________________________________________*/
+                // meteosabi.es________________________________________________________________________________
 
                 Document docBron = Jsoup.connect("https://meteosabi.es/el-tiempo-en-bronchales-teruel").get();
                 titulo = "Bronchales (Camping)";
@@ -418,11 +404,14 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeBron+= "\nT.Min: "+docBron.getElementById("LowTempToday").text();
                 textIncomeBron+= "   T.Max: "+docBron.getElementById("HighTempToday").text();
 
-                /* ________________________________________________________________________________                   END     */
+                //Log.d(TAG,"mobilito_"+isOnline2("https://www.avamet.org/mxo_i.php?id=c04m055e02"));
+                //Toast.makeText(getApplicationContext()," TOstada!" ,Toast.LENGTH_SHORT).show();
 
 
             }catch( Exception e ){
+
                 e.printStackTrace();
+
             }
 
             return null;
@@ -434,16 +423,18 @@ public class Main2Activity extends AppCompatActivity {
             texVista.setText(textIncomeVista);
             texXodos.setText(textIncomeXodos);
             texAdz.setText(textIncomeAtz);
-            texVf.setText((textIncomeVf));
             texValde.setText((textIncomeVal));
             texVm.setText((textIncomeVm));
             texAlc.setText((textIncomeAlc));
             texOnd.setText((textIncomeOnd));
             texTor.setText((textIncomeTor));
             texPue.setText((textIncomePue));
+            texVf.setText((textIncomeVf));
             texMos.setText((textIncomeMos));
             texMon.setText(textIncomeMon);
             texBron.setText(textIncomeBron);
+
+            //Toast.makeText(getApplicationContext()," TOAST!" ,Toast.LENGTH_SHORT).show();
 
         }
 
@@ -460,6 +451,41 @@ public class Main2Activity extends AppCompatActivity {
                 return orgData.substring(idx-1,orgData.length());
             }
             return orgData.substring(idx,orgData.length());
+        }
+
+
+        public boolean isOnline2(String url){
+            try {
+                URL myURL = new URL(url);
+
+                URLConnection myURLConnection = myURL.openConnection();
+                myURLConnection.setReadTimeout(1500);
+                myURLConnection.connect();
+            }
+            catch (MalformedURLException e) {
+                // new URL() failed
+                // ...
+                return false;
+            }
+            catch (IOException e) {
+                // openConnection() failed
+                // ...
+                Log.d(TAG,"Fails Connexion IOException HERE!");
+                return false;
+            }
+            return true;
+        }
+        public boolean isOnline() {
+            try {
+                int timeoutMs = 1500;
+                Socket sock = new Socket();
+                SocketAddress sockaddr = new InetSocketAddress("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=arn&l=8486X&w=1&datos=img", 8080);
+
+                sock.connect(sockaddr, timeoutMs);
+                sock.close();
+
+                return true;
+            } catch (IOException e) { return false; }
         }
     }
 }
