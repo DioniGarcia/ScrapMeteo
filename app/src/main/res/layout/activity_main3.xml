@@ -13,39 +13,37 @@
 
     tools:context=".Main2Activity">
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="8">
 
-        <TextView
-            android:id="@+id/textView"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="Test Estaciones"
-            android:textSize="22sp"
-            tools:textColor="@android:color/black" />
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            app:srcCompat="@drawable/testestaciones" />
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="2" />
+            android:layout_weight=".5" />
 
         <Button
             android:id="@+id/b1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="1.5"
             android:gravity="center_vertical|center_horizontal"
             android:text="Test"
             android:textSize="14sp" />
     </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="5dp" />
 
     <ScrollView
         android:layout_width="match_parent"

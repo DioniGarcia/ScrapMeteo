@@ -40,22 +40,7 @@ public class Main3Activity extends AppCompatActivity {
 
     private Map<String,String> estaciones = new HashMap<>();
 
-/*
-    private Map <String,String> estaciones = {"https://www.avamet.org/mxo_i.php?id=c04m139e01",
-                                    "https://www.avamet.org/mxo_i.php?id=c04m055e02",
-                                    "https://www.avamet.org/mxo_i.php?id=c04m001e02",
-                                    "https://www.avamet.org/mxo_i.php?id=c99m044e15",
-                                    "https://www.avamet.org/mxo_i.php?id=c08m131e01",
-                                    "https://www.avamet.org/mxo_i.php?id=c06m084e02",
-                                    "https://www.avamet.org/mxo_i.php?id=c99m044e01",
-                                    "https://www.avamet.org/mxo_i.php?id=c07m115e01",
-                                    "https://www.avamet.org/mxo_i.php?id=c09m201e01",
-                                    "http://www.aemet.es/va/eltiempo/observacion/ultimosdatos?k=val&l=8489X&w=1&datos=img",
-                                    "http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=arn&l=8486X&w=1&datos=img",
-                                    "http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=val&l=8472A&w=1&datos=img&f=tmax",
-                                    "https://meteosabi.es/el-tiempo-en-bronchales-teruel"
-                                    };
-*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

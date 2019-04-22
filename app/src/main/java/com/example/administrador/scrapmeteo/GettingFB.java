@@ -29,10 +29,6 @@ public class GettingFB {
     private Map<String, Object> rains;
 
 
-
-
-
-
     public GettingFB(){
         monthly = new ArrayList<>();
         anuals = new ArrayList<>();
@@ -42,11 +38,11 @@ public class GettingFB {
     }
 
     public ArrayList<Double> getMonthly(){
-        return monthly;
+        return this.monthly;
     }
 
     public ArrayList<Double> getAnnuals(){
-        return monthly;
+        return this.anuals;
     }
 
     public void fillData(){

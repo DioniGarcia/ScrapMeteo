@@ -4,35 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wallpaper"
+    android:background="@drawable/boletuspic"
     android:orientation="vertical"
     android:paddingLeft="15dp"
     android:paddingTop="15dp"
     android:paddingRight="15dp"
     android:paddingBottom="15dp"
 
+    android:weightSum="10"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@drawable/logo"
+        android:layout_weight=".1"
+        android:background="@drawable/mushstorm"
         android:orientation="vertical"></LinearLayout>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="144dp" />
+        android:layout_height="wrap_content"
+        android:layout_weight="7.5" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/lluvias"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="toLluvias"
             android:text="Lluvias" />
@@ -40,7 +44,7 @@
         <Button
             android:id="@+id/buttgraf"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="toTest"
             android:text="Test" />
@@ -49,19 +53,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttmap"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="MushMap" />
 
         <Button
             android:id="@+id/buttinfo"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Info" />
     </LinearLayout>
