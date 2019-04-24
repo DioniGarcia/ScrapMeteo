@@ -16,7 +16,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="79dp"
         android:layout_marginTop="20dp"
         android:layout_weight=".1"
         android:background="@drawable/mushstorm"
@@ -25,49 +25,75 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="7.5" />
+        android:layout_weight="8.5" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/lluvias"
-            android:layout_width="0dp"
+            android:layout_width="20dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/mybutt"
             android:onClick="toLluvias"
-            android:text="Lluvias" />
+            android:padding="10dp"
+            android:text="Lluvias"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
 
         <Button
+            android:padding="10dp"
             android:id="@+id/buttgraf"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/mybutt"
             android:onClick="toTest"
-            android:text="Test" />
+            android:text="Test"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_weight="0.5"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <Button
-            android:id="@+id/buttmap"
-            android:layout_width="0dp"
+            android:id="@+id/butmmap"
+
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="MushMap" />
+            android:background="@drawable/mybutt"
+            android:padding="10dp"
+            android:paddingRight="10dp"
+            android:text="MushMap"
+            android:textColor="#ffffff"
+            android:textSize="18sp" /><![CDATA[
+        android:text="MushMap" />
+
+
+
+        ]]>
 
         <Button
             android:id="@+id/buttinfo"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Info" />
+            android:background="@drawable/mybutt"
+            android:padding="10dp"
+            android:paddingLeft="10dp"
+            android:text="Info"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

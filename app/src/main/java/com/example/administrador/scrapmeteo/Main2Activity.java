@@ -189,12 +189,10 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeVal += "\n"+ "Humedad relativa: " + cutBeforeData( docVal.getElementById("hrel").text());
                 textIncomeVal += "   Viento: " + cutBeforeData( docVal.getElementById("vent").text());
                 textIncomeVal += "\n"+ "Hoy: " + cutBeforeData( docVal.getElementById("prec").text() );
+                textIncomeVal += "   Mes: "+oneDecimal(gFb.getMonthly().get(4).toString())+"mm";
                 i=0;
                 for (Element e : docVal.getElementById("mesdades").children()) {
-                    if (i == 5 ) {
-                        textIncomeVal += "   Mes: "+  cutBeforeData( e.text() );
-
-                    }else if (i==6){
+                    if (i==6){
                         textIncomeVal += "   Año: "+  cutBeforeData( e.text() );
                         break;
                     }
@@ -261,12 +259,10 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeAlc += "\n"+ "Humedad relativa: " + cutBeforeData( docAlc.getElementById("hrel").text());
                 textIncomeAlc += "   Viento: " + cutBeforeData( docAlc.getElementById("vent").text());
                 textIncomeAlc += "\n"+ "Hoy: " + cutBeforeData( docAlc.getElementById("prec").text() );
+                textIncomeAlc +="   Mes: "+oneDecimal(gFb.getMonthly().get(7).toString())+"mm";
                 i=0;
                 for (Element e : docAlc.getElementById("mesdades").children()) {
-                    if (i == 5 ) {
-                        textIncomeAlc += "   Mes: "+  cutBeforeData( e.text() );
-
-                    }else if (i==6){
+                    if (i==6){
                         textIncomeAlc += "   Año: "+  cutBeforeData( e.text() );
                         break;
                     }
