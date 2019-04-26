@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -124,19 +125,19 @@ public class Main3Activity extends AppCompatActivity {
                 i++;
             }*/
             //Toast.makeText(getApplicationContext()," PASSED!" ,Toast.LENGTH_LONG).show();
-            textIncomeVista = "Vistabella: "+isOnline2(estaciones.get(stats[0]));
-            textIncomeXodos= "Xodos: "+isOnline2(estaciones.get(stats[1]));
-            textIncomeAtz= "Atzeneta: "+isOnline2(estaciones.get(stats[2]));
-            textIncomeVf= "Villafranca: "+isOnline2(estaciones.get(stats[9]));
-            textIncomeVal= "Valdelinares: "+isOnline2(estaciones.get(stats[3]));
-            textIncomeVm= "Villamalur: "+isOnline2(estaciones.get(stats[4]));
-            textIncomeAlc= "Alcalá de la selva: "+isOnline2(estaciones.get(stats[6]));
-            textIncomeOnd="Onda: "+isOnline2(estaciones.get(stats[5]));
-            textIncomePue= "Puebla de San Miguel: "+isOnline2(estaciones.get(stats[8]));
-            textIncomeTor= "El Toro: "+isOnline2(estaciones.get(stats[7]));
-            textIncomeMos= "Mosqueruela: "+isOnline2(estaciones.get(stats[10]));
-            textIncomeMon= "Montanejos: "+isOnline2(estaciones.get(stats[11]));
-            textIncomeBron= "Bronchales: "+isOnline2(estaciones.get(stats[12]));
+            textIncomeVista = "Vistabella: "+isOnline(estaciones.get(stats[0]));
+            textIncomeXodos= "Xodos: "+isOnline(estaciones.get(stats[1]));
+            textIncomeAtz= "Atzeneta: "+isOnline(estaciones.get(stats[2]));
+            textIncomeVf= "Villafranca: "+isOnline(estaciones.get(stats[9]));
+            textIncomeVal= "Valdelinares: "+isOnline(estaciones.get(stats[3]));
+            textIncomeVm= "Villamalur: "+isOnline(estaciones.get(stats[4]));
+            textIncomeAlc= "Alcalá de la selva: "+isOnline(estaciones.get(stats[6]));
+            textIncomeOnd="Onda: "+isOnline(estaciones.get(stats[5]));
+            textIncomePue= "Puebla de San Miguel: "+isOnline(estaciones.get(stats[8]));
+            textIncomeTor= "El Toro: "+isOnline(estaciones.get(stats[7]));
+            textIncomeMos= "Mosqueruela: "+isOnline(estaciones.get(stats[10]));
+            textIncomeMon= "Montanejos: "+isOnline(estaciones.get(stats[11]));
+            textIncomeBron= "Bronchales: "+isOnline(estaciones.get(stats[12]));
             return null;
         }
 
@@ -179,23 +180,14 @@ public class Main3Activity extends AppCompatActivity {
         }
 
 
-        public String isOnline2(String url){
+        public String isOnline(String url){
             try {
-                URL myURL = new URL(url);
+                Connection conn = Jsoup.connect(url);
+                conn.timeout(500);
+                Document doc = conn.get();
+            }
+            catch (Exception e) {
 
-                URLConnection myURLConnection = myURL.openConnection();
-                myURLConnection.setReadTimeout(1500);
-                myURLConnection.connect();
-            }
-            catch (MalformedURLException e) {
-                // new URL() failed
-                // ...
-                return "NOT WORKING";
-            }
-            catch (IOException e) {
-                // openConnection() failed
-                // ...
-                Log.d(TAG,"Fails Connexion IOException HERE!");
                 return "NOT WORKING";
             }
             return "WORKING OK!";

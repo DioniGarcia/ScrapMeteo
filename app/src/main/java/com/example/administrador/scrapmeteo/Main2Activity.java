@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -79,31 +80,33 @@ public class Main2Activity extends AppCompatActivity {
 
     public class doit extends AsyncTask<Void,Void,Void>{
 
-        String textIncomeVista = "NOT WORKING";
-        String textIncomeXodos= "NOT WORKING";
-        String textIncomeAtz= "NOT WORKING";
-        String textIncomeVf= "NOT WORKING";
-        String textIncomeVal= "NOT WORKING";
-        String textIncomeVm= "NOT WORKING";
-        String textIncomeAlc= "NOT WORKING";
-        String textIncomeOnd= "NOT WORKING";
-        String textIncomePue= "NOT WORKING";
-        String textIncomeTor= "NOT WORKING";
-        String textIncomeMos= "NOT WORKING";
-        String textIncomeMon= "NOT WORKING";
-        String textIncomeBron= "NOT WORKING";
+        String textIncomeVista = "VIstabella - NOT WORKING - AVAMET";
+        String textIncomeXodos= "Xodos - NOT WORKING - AVAMET";
+        String textIncomeAtz= "Atzeneta - NOT WORKING - AVAMET";
+        String textIncomeVf= "Villafranca - NOT WORKING";
+        String textIncomeVal= "Valdelinares - NOT WORKING - AVAMET";
+        String textIncomeVm= "Villamalur - NOT WORKING - AVAMET";
+        String textIncomeAlc= "Alcalá selva - NOT WORKING - AVAMET";
+        String textIncomeOnd= "Onda - NOT WORKING - AVAMET";
+        String textIncomePue= "Puebla de San Miguel - NOT WORKING - AVAMET";
+        String textIncomeTor= "El Toro - NOT WORKING - AVAMET";
+        String textIncomeMos= "Mosqueruela - NOT WORKING - AeMET";
+        String textIncomeMon= "Montanejos - NOT WORKING - AeMET";
+        String textIncomeBron= "Bronchales - NOT WORKIN - Sabiñanigo";
 
 
 
         @Override
         protected Void doInBackground(Void... voids) {
+            int timeout = 800;
+            int i = 0;
+            String titulo="";
 
             try{
-                int i = 0;
-                String titulo="";
 
-                Document docVista = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c04m139e01").get();
-
+                Connection c = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c04m139e01");
+                c.timeout(timeout);
+                Document docVista = c.get();
 
                 textIncomeVista = "San Juan de Peñagolosa";
                 textIncomeVista += "\n"+ "Humedad relativa: " + cutBeforeData( docVista.getElementById("hrel").text());
@@ -121,18 +124,21 @@ public class Main2Activity extends AppCompatActivity {
                     }
                     i+=1;
                 }
-
-                //textIncomeVista += "   Mensual(prova): "+gFb.getMonthly().get(0);
-                //textIncomeVista += "   Anual(prova): "+ gFb.getAnnuals().get(0);
-
                 textIncomeVista += "\n"+ "T.Min: " + cutBeforeData( docVista.getElementById("temp_min").text() );
                 textIncomeVista += "   T.Max: " + cutBeforeData( docVista.getElementById("temp_max").text() );
 
 
+            }catch( Exception e ){
 
+                e.printStackTrace();
+                Log.d(TAG,"ESTA PETANDO");
 
+            }
 
-                Document docXodos = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c04m055e02").get();
+            try{
+                Connection c = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c04m055e02");
+                c.timeout(timeout);
+                Document docXodos = c.get();
 
                 textIncomeXodos = "Xodos";
                 textIncomeXodos += "\n"+ "Humedad relativa: " + cutBeforeData( docXodos.getElementById("hrel").text());
@@ -154,9 +160,19 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeXodos += "\n"+ "T.Min: " + cutBeforeData( docXodos.getElementById("temp_min").text() );
                 textIncomeXodos += "   T.Max: " + cutBeforeData( docXodos.getElementById("temp_max").text() );
 
+            }catch( Exception e ){
 
+                e.printStackTrace();
+                Log.d(TAG,"ESTA PETANDO");
 
-                Document docAtz = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c04m001e02").get();
+            }
+
+            try{
+
+                Connection c = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c04m001e02");
+                c.timeout(timeout);
+                Document docAtz = c.get();
+
 
                 textIncomeAtz = "Adzaneta";
                 textIncomeAtz += "\n"+ "Humedad relativa: " + cutBeforeData( docAtz.getElementById("hrel").text());
@@ -180,10 +196,19 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
+            }catch( Exception e ){
 
+                e.printStackTrace();
+                Log.d(TAG,"ESTA PETANDO");
 
+            }
 
-                Document docVal = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c99m044e15").get();
+            try{
+
+                Connection c = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c99m044e15");
+                c.timeout(timeout);
+                Document docVal = c.get();
+
 
                 textIncomeVal = "Valdelinares (pistas)";
                 textIncomeVal += "\n"+ "Humedad relativa: " + cutBeforeData( docVal.getElementById("hrel").text());
@@ -203,9 +228,18 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeVal += "\n"+ "T.Min: " + cutBeforeData( docVal.getElementById("temp_min").text() );
                 textIncomeVal += "   T.Max: " + cutBeforeData( docVal.getElementById("temp_max").text() );
 
+            }catch( Exception e ){
 
+                e.printStackTrace();
+                Log.d(TAG,"ESTA PETANDO");
 
-                Document docVm = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c08m131e01").get();
+            }
+
+            try{
+
+                Connection c = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c08m131e01");
+                c.timeout(timeout);
+                Document docVm = c.get();
 
                 textIncomeVm = "Villamalur";
                 textIncomeVm += "\n"+ "Humedad relativa: " + cutBeforeData( docVm.getElementById("hrel").text());
@@ -227,9 +261,18 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeVm += "\n"+ "T.Min: " + cutBeforeData( docVm.getElementById("temp_min").text() );
                 textIncomeVm += "   T.Max: " + cutBeforeData( docVm.getElementById("temp_max").text() );
 
+            }catch( Exception e ){
 
+                e.printStackTrace();
+                Log.d(TAG,"ESTA PETANDO");
 
-                Document docOnd= Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c06m084e02").get();
+            }
+
+            try{
+
+                Connection c = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c06m084e02");
+                c.timeout(timeout);
+                Document docOnd = c.get();
 
                 textIncomeOnd = "Onda";
                 textIncomeOnd += "\n"+ "Humedad relativa: " + cutBeforeData( docOnd.getElementById("hrel").text());
@@ -251,9 +294,18 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeOnd += "\n"+ "T.Min: " + cutBeforeData( docOnd.getElementById("temp_min").text() );
                 textIncomeOnd += "   T.Max: " + cutBeforeData( docOnd.getElementById("temp_max").text() );
 
+            }catch( Exception e ){
 
+                e.printStackTrace();
+                Log.d(TAG,"ESTA PETANDO");
 
-                Document docAlc = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c99m044e01").get();
+            }
+
+            try{
+
+                Connection c = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c99m044e01");
+                c.timeout(timeout);
+                Document docAlc = c.get();
 
                 textIncomeAlc = "Alcalá de la selva";
                 textIncomeAlc += "\n"+ "Humedad relativa: " + cutBeforeData( docAlc.getElementById("hrel").text());
@@ -274,9 +326,18 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeAlc += "   T.Max: " + cutBeforeData( docAlc.getElementById("temp_max").text() );
 
 
+            }catch( Exception e ){
 
+                e.printStackTrace();
+                Log.d(TAG,"ESTA PETANDO");
 
-                Document docTor= Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c07m115e01").get();
+            }
+
+            try{
+
+                Connection c = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c07m115e01");
+                c.timeout(timeout);
+                Document docTor = c.get();
 
                 textIncomeTor = "El Toro";
                 textIncomeTor += "\n"+ "Humedad relativa: " + cutBeforeData( docTor.getElementById("hrel").text());
@@ -299,8 +360,18 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeTor += "   T.Max: " + cutBeforeData( docTor.getElementById("temp_max").text() );
 
 
+            }catch( Exception e ){
 
-                Document docPue = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c09m201e01").get();
+                e.printStackTrace();
+                Log.d(TAG,"ESTA PETANDO");
+
+            }
+
+            try{
+
+                Connection c = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c09m201e01");
+                c.timeout(timeout);
+                Document docPue = c.get();
 
                 textIncomePue = "Puebla de San Miguel";
                 textIncomePue += "\n"+ "Humedad relativa: " + cutBeforeData( docPue.getElementById("hrel").text());
@@ -324,13 +395,24 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
+            }catch( Exception e ){
 
+                e.printStackTrace();
+                Log.d(TAG,"ESTA PETANDO");
+
+            }
 
 
                 int idx=0;
                 String [] meteo = new String[6];
 
-                Document docVf = Jsoup.connect("http://www.aemet.es/va/eltiempo/observacion/ultimosdatos?k=val&l=8489X&w=1&datos=img").get();
+
+                try{
+
+                Connection c = Jsoup.connect("http://www.aemet.es/va/eltiempo/observacion/ultimosdatos?k=val&l=8489X&w=1&datos=img");
+                c.timeout(timeout);
+                Document docVf = c.get();
+
                 textIncomeVf = "Villafranca del cid";
 
                 for(Element e : docVf.getElementsByClass("fila_impar")){
@@ -345,10 +427,20 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeVf+="   T.Max: "+meteo[0].split(" ")[0];
 
 
+                }catch( Exception e ){
+
+                    e.printStackTrace();
+                    Log.d(TAG,"ESTA PETANDO");
+
+                }
+
+                try{
 
                 // AEMET Mosqueruela
 
-                Document docMos = Jsoup.connect("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=arn&l=8486X&w=1&datos=img").get();
+                Connection c = Jsoup.connect("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=arn&l=8486X&w=1&datos=img");
+                c.timeout(timeout);
+                Document docMos = c.get();
 
                 textIncomeMos = "Mosqueruela";
 
@@ -366,11 +458,20 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeMos+="\nT.Min: "+meteo[1].split(" ")[0];
                 textIncomeMos+="   T.Max: "+meteo[0].split(" ")[0];
 
+                }catch( Exception e ){
 
+                    e.printStackTrace();
+                    Log.d(TAG,"ESTA PETANDO");
+
+                }
+
+                try{
 
                 // AEMET Montanejos________________________________________________________________________________
 
-                Document docMon = Jsoup.connect("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=val&l=8472A&w=1&datos=img&f=tmax").get();
+                Connection c = Jsoup.connect("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=val&l=8472A&w=1&datos=img&f=tmax");
+                c.timeout(timeout);
+                Document docMon = c.get();
 
                 textIncomeMon = "Montanejos";
 
@@ -389,11 +490,23 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeMon+="\nT.Min: "+meteo[1].split(" ")[0];
                 textIncomeMon+="   T.Max: "+meteo[0].split(" ")[0];
 
+                }catch( Exception e ){
+
+                    e.printStackTrace();
+                    Log.d(TAG,"ESTA PETANDO");
+
+                }
+
+                try{
 
 
                 // meteosabi.es________________________________________________________________________________
 
-                Document docBron = Jsoup.connect("https://meteosabi.es/el-tiempo-en-bronchales-teruel").get();
+
+                Connection c = Jsoup.connect("https://meteosabi.es/el-tiempo-en-bronchales-teruel");
+                c.timeout(timeout);
+                Document docBron = c.get();
+
                 titulo = "Bronchales (Camping)";
                 textIncomeBron = titulo;
                 textIncomeBron+= "\nViento: "+docBron.getElementById("WindAverage").text()+"km/h";
@@ -403,15 +516,12 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeBron+= "\nT.Min: "+docBron.getElementById("LowTempToday").text();
                 textIncomeBron+= "   T.Max: "+docBron.getElementById("HighTempToday").text();
 
+                }catch( Exception e ){
 
+                    e.printStackTrace();
+                    Log.d(TAG,"ESTA PETANDO");
 
-
-
-            }catch( Exception e ){
-
-                e.printStackTrace();
-
-            }
+                }
 
             return null;
         }
