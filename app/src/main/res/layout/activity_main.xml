@@ -73,6 +73,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/mybutt"
+            android:onClick="toMap"
             android:padding="10dp"
             android:paddingRight="10dp"
             android:text="MushMap"

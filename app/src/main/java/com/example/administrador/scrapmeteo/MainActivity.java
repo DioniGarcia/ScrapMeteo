@@ -26,4 +26,10 @@ public class MainActivity extends AppCompatActivity {
         Intent next = new Intent(this, Main3Activity.class);
         startActivity(next);
     }
+
+    public void toMap(View view) {
+        Intent next = new Intent(this, MapsActivity.class);
+        startActivity(next);
+    }
+
 }

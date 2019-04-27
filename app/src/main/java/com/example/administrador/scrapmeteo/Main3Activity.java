@@ -183,7 +183,7 @@ public class Main3Activity extends AppCompatActivity {
         public String isOnline(String url){
             try {
                 Connection conn = Jsoup.connect(url);
-                conn.timeout(500);
+                conn.timeout(800);
                 Document doc = conn.get();
             }
             catch (Exception e) {

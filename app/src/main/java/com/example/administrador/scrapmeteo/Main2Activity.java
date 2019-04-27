@@ -98,7 +98,7 @@ public class Main2Activity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            int timeout = 800;
+            int timeout = 1000;
             int i = 0;
             String titulo="";
 
