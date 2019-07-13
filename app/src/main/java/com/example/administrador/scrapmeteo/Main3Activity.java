@@ -155,21 +155,6 @@ public class Main3Activity extends AppCompatActivity {
 
         }
 
-        public String cutBeforeData(String orgData){
-            int idx = 0;
-            for (int i=0;i<orgData.length();i++){
-                if (Character.isDigit(orgData.charAt(i))) {
-                    idx = i;
-                    break;
-                }
-            }
-            // Contemplar temperaturas negativas
-            if (idx != 0 && orgData.charAt(idx-1) == '-'){
-                return orgData.substring(idx-1,orgData.length());
-            }
-            return orgData.substring(idx,orgData.length());
-        }
-
 
         public String isOnline(String url){
             try {

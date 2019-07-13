@@ -7,32 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
-import java.net.Proxy;
-import java.net.Socket;
-import java.net.SocketAddress;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
 
 public class Main2Activity extends AppCompatActivity {
     TextView texVista, texXodos, texAdz,texVf,texValde, texVm, texOnd, texAlc, texTor, texPue, texMos, texMon, texBron;
@@ -110,23 +90,23 @@ public class Main2Activity extends AppCompatActivity {
                 Document docVista = c.get();
 
                 textIncomeVista = "San Juan de Peñagolosa";
-                textIncomeVista += "\n"+ "Humedad relativa: " + cutBeforeData(docVista.getElementById("hrel").text())+"%";
-                textIncomeVista += "   Viento: " + cutBeforeData( docVista.getElementById("vent").text())+"km/h";
-                textIncomeVista += "\n"+ "Hoy: " + cutBeforeData( docVista.getElementById("prec").text() )+"mm";
+                textIncomeVista += "\n"+ "Humedad relativa: " + cutNumericData(docVista.getElementById("hrel").text())+"%";
+                textIncomeVista += "   Viento: " + cutNumericData( docVista.getElementById("vent").text())+"km/h";
+                textIncomeVista += "\n"+ "Hoy: " + cutNumericData( docVista.getElementById("prec").text() )+"mm";
 
                 for (Element e : docVista.getElementById("mesdades").children()) {
                     if (i == 5 ) {
-                        textIncomeVista += "   Mes: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeVista += "   Mes: "+  cutNumericData( e.text() )+"mm";
 
                     }else if (i==6){
-                        textIncomeVista += "   Año: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeVista += "   Año: "+  cutNumericData( e.text() )+"mm";
                         i=0;
                         break;
                     }
                     i+=1;
                 }
-                textIncomeVista += "\n"+ "T.Min: " + cutBeforeData( docVista.getElementById("temp_min").text() )+"ºC";
-                textIncomeVista += "   T.Max: " + cutBeforeData( docVista.getElementById("temp_max").text() )+"ºC";
+                textIncomeVista += "\n"+ "T.Min: " + cutNumericData( docVista.getElementById("temp_min").text() )+"ºC";
+                textIncomeVista += "   T.Max: " + cutNumericData( docVista.getElementById("temp_max").text() )+"ºC";
 
 
             }catch( Exception e ){
@@ -142,24 +122,24 @@ public class Main2Activity extends AppCompatActivity {
                 Document docXodos = c.get();
 
                 textIncomeXodos = "Xodos";
-                textIncomeXodos += "\n"+ "Humedad relativa: " + cutBeforeData( docXodos.getElementById("hrel").text())+"%";
-                textIncomeXodos += "   Viento: " + cutBeforeData( docXodos.getElementById("vent").text())+"km/h";
-                textIncomeXodos += "\n"+ "Hoy: " + cutBeforeData( docXodos.getElementById("prec").text() )+"mm";
+                textIncomeXodos += "\n"+ "Humedad relativa: " + cutNumericData( docXodos.getElementById("hrel").text())+"%";
+                textIncomeXodos += "   Viento: " + cutNumericData( docXodos.getElementById("vent").text())+"km/h";
+                textIncomeXodos += "\n"+ "Hoy: " + cutNumericData( docXodos.getElementById("prec").text() )+"mm";
 
                 i=0;
                 for (Element e : docXodos.getElementById("mesdades").children()) {
                     if (i == 5 ) {
-                        textIncomeXodos += "   Mes: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeXodos += "   Mes: "+  cutNumericData( e.text() )+"mm";
 
                     }else if (i==6){
-                        textIncomeXodos += "   Año: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeXodos += "   Año: "+  cutNumericData( e.text() )+"mm";
                         break;
                     }
                     i+=1;
                 }
 
-                textIncomeXodos += "\n"+ "T.Min: " + cutBeforeData( docXodos.getElementById("temp_min").text() )+"ºC";
-                textIncomeXodos += "   T.Max: " + cutBeforeData( docXodos.getElementById("temp_max").text() )+"ºC";
+                textIncomeXodos += "\n"+ "T.Min: " + cutNumericData( docXodos.getElementById("temp_min").text() )+"ºC";
+                textIncomeXodos += "   T.Max: " + cutNumericData( docXodos.getElementById("temp_max").text() )+"ºC";
 
             }catch( Exception e ){
 
@@ -176,24 +156,24 @@ public class Main2Activity extends AppCompatActivity {
 
 
                 textIncomeAtz = "Adzaneta";
-                textIncomeAtz += "\n"+ "Humedad relativa: " + cutBeforeData( docAtz.getElementById("hrel").text())+"%";
-                textIncomeAtz += "   Viento: " + cutBeforeData( docAtz.getElementById("vent").text())+"km/h";
-                textIncomeAtz += "\n"+ "Hoy: " + cutBeforeData( docAtz.getElementById("prec").text() )+"mm";
+                textIncomeAtz += "\n"+ "Humedad relativa: " + cutNumericData( docAtz.getElementById("hrel").text())+"%";
+                textIncomeAtz += "   Viento: " + cutNumericData( docAtz.getElementById("vent").text())+"km/h";
+                textIncomeAtz += "\n"+ "Hoy: " + cutNumericData( docAtz.getElementById("prec").text() )+"mm";
                 i=0;
                 for (Element e : docAtz.getElementById("mesdades").children()) {
                     if (i == 5 ) {
-                        textIncomeAtz += "   Mes: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeAtz += "   Mes: "+  cutNumericData( e.text() )+"mm";
 
                     }else if (i==6){
-                        textIncomeAtz += "   Año: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeAtz += "   Año: "+  cutNumericData( e.text() )+"mm";
                         break;
                     }
                     i+=1;
                 }
 
 
-                textIncomeAtz += "\n"+ "T.Min: " + cutBeforeData( docAtz.getElementById("temp_min").text() )+"ºC";
-                textIncomeAtz += "   T.Max: " + cutBeforeData( docAtz.getElementById("temp_max").text() )+"ºC";
+                textIncomeAtz += "\n"+ "T.Min: " + cutNumericData( docAtz.getElementById("temp_min").text() )+"ºC";
+                textIncomeAtz += "   T.Max: " + cutNumericData( docAtz.getElementById("temp_max").text() )+"ºC";
 
 
 
@@ -212,22 +192,22 @@ public class Main2Activity extends AppCompatActivity {
 
 
                 textIncomeVal = "Valdelinares (pistas)";
-                textIncomeVal += "\n"+ "Humedad relativa: " + cutBeforeData( docVal.getElementById("hrel").text())+"%";
-                textIncomeVal += "   Viento: " + cutBeforeData( docVal.getElementById("vent").text())+"km/h";
-                textIncomeVal += "\n"+ "Hoy: " + cutBeforeData( docVal.getElementById("prec").text() )+"mm";
+                textIncomeVal += "\n"+ "Humedad relativa: " + cutNumericData( docVal.getElementById("hrel").text())+"%";
+                textIncomeVal += "   Viento: " + cutNumericData( docVal.getElementById("vent").text())+"km/h";
+                textIncomeVal += "\n"+ "Hoy: " + cutNumericData( docVal.getElementById("prec").text() )+"mm";
                 textIncomeVal += "   Mes: "+oneDecimal(gFb.getMonthly().get(4).toString())+"mm";
                 i=0;
                 for (Element e : docVal.getElementById("mesdades").children()) {
                     if (i==6){
-                        textIncomeVal += "   Año: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeVal += "   Año: "+  cutNumericData( e.text() )+"mm";
                         break;
                     }
                     i+=1;
                 }
 
 
-                textIncomeVal += "\n"+ "T.Min: " + cutBeforeData( docVal.getElementById("temp_min").text() )+"ºC";
-                textIncomeVal += "   T.Max: " + cutBeforeData( docVal.getElementById("temp_max").text() )+"ºC";
+                textIncomeVal += "\n"+ "T.Min: " + cutNumericData( docVal.getElementById("temp_min").text() )+"ºC";
+                textIncomeVal += "   T.Max: " + cutNumericData( docVal.getElementById("temp_max").text() )+"ºC";
 
             }catch( Exception e ){
 
@@ -243,24 +223,24 @@ public class Main2Activity extends AppCompatActivity {
                 Document docVm = c.get();
 
                 textIncomeVm = "Villamalur";
-                textIncomeVm += "\n"+ "Humedad relativa: " + cutBeforeData( docVm.getElementById("hrel").text())+"%";
-                textIncomeVm += "   Viento: " + cutBeforeData( docVm.getElementById("vent").text())+"km/h";
-                textIncomeVm += "\n"+ "Hoy: " + cutBeforeData( docVm.getElementById("prec").text() )+"mm";
+                textIncomeVm += "\n"+ "Humedad relativa: " + cutNumericData( docVm.getElementById("hrel").text())+"%";
+                textIncomeVm += "   Viento: " + cutNumericData( docVm.getElementById("vent").text())+"km/h";
+                textIncomeVm += "\n"+ "Hoy: " + cutNumericData( docVm.getElementById("prec").text() )+"mm";
                 i=0;
                 for (Element e : docVm.getElementById("mesdades").children()) {
                     if (i == 5 ) {
-                        textIncomeVm += "   Mes: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeVm += "   Mes: "+  cutNumericData( e.text() )+"mm";
 
                     }else if (i==6){
-                        textIncomeVm += "   Año: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeVm += "   Año: "+  cutNumericData( e.text() )+"mm";
                         break;
                     }
                     i+=1;
                 }
 
 
-                textIncomeVm += "\n"+ "T.Min: " + cutBeforeData( docVm.getElementById("temp_min").text() )+"ºC";
-                textIncomeVm += "   T.Max: " + cutBeforeData( docVm.getElementById("temp_max").text() )+"ºC";
+                textIncomeVm += "\n"+ "T.Min: " + cutNumericData( docVm.getElementById("temp_min").text() )+"ºC";
+                textIncomeVm += "   T.Max: " + cutNumericData( docVm.getElementById("temp_max").text() )+"ºC";
 
             }catch( Exception e ){
 
@@ -276,24 +256,24 @@ public class Main2Activity extends AppCompatActivity {
                 Document docOnd = c.get();
 
                 textIncomeOnd = "Onda";
-                textIncomeOnd += "\n"+ "Humedad relativa: " + cutBeforeData( docOnd.getElementById("hrel").text())+"%";
-                textIncomeOnd += "   Viento: " + cutBeforeData( docOnd.getElementById("vent").text())+"km/h";
-                textIncomeOnd += "\n"+ "Hoy: " + cutBeforeData( docOnd.getElementById("prec").text() )+"mm";
+                textIncomeOnd += "\n"+ "Humedad relativa: " + cutNumericData( docOnd.getElementById("hrel").text())+"%";
+                textIncomeOnd += "   Viento: " + cutNumericData( docOnd.getElementById("vent").text())+"km/h";
+                textIncomeOnd += "\n"+ "Hoy: " + cutNumericData( docOnd.getElementById("prec").text() )+"mm";
                 i=0;
                 for (Element e : docOnd.getElementById("mesdades").children()) {
                     if (i == 5 ) {
-                        textIncomeOnd += "   Mes: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeOnd += "   Mes: "+  cutNumericData( e.text() )+"mm";
 
                     }else if (i==6){
-                        textIncomeOnd += "   Año: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeOnd += "   Año: "+  cutNumericData( e.text() )+"mm";
                         break;
                     }
                     i+=1;
                 }
 
 
-                textIncomeOnd += "\n"+ "T.Min: " + cutBeforeData( docOnd.getElementById("temp_min").text() )+"ºC";
-                textIncomeOnd += "   T.Max: " + cutBeforeData( docOnd.getElementById("temp_max").text() )+"ºC";
+                textIncomeOnd += "\n"+ "T.Min: " + cutNumericData( docOnd.getElementById("temp_min").text() )+"ºC";
+                textIncomeOnd += "   T.Max: " + cutNumericData( docOnd.getElementById("temp_max").text() )+"ºC";
 
             }catch( Exception e ){
 
@@ -309,22 +289,22 @@ public class Main2Activity extends AppCompatActivity {
                 Document docAlc = c.get();
 
                 textIncomeAlc = "Alcalá de la selva";
-                textIncomeAlc += "\n"+ "Humedad relativa: " + cutBeforeData( docAlc.getElementById("hrel").text())+"%";
-                textIncomeAlc += "   Viento: " + cutBeforeData( docAlc.getElementById("vent").text())+"km/h";
-                textIncomeAlc += "\n"+ "Hoy: " + cutBeforeData( docAlc.getElementById("prec").text() )+"mm";
+                textIncomeAlc += "\n"+ "Humedad relativa: " + cutNumericData( docAlc.getElementById("hrel").text())+"%";
+                textIncomeAlc += "   Viento: " + cutNumericData( docAlc.getElementById("vent").text())+"km/h";
+                textIncomeAlc += "\n"+ "Hoy: " + cutNumericData( docAlc.getElementById("prec").text() )+"mm";
                 textIncomeAlc +="   Mes: "+oneDecimal(gFb.getMonthly().get(7).toString())+"mm";
                 i=0;
                 for (Element e : docAlc.getElementById("mesdades").children()) {
                     if (i==6){
-                        textIncomeAlc += "   Año: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeAlc += "   Año: "+  cutNumericData( e.text() )+"mm";
                         break;
                     }
                     i+=1;
                 }
 
 
-                textIncomeAlc += "\n"+ "T.Min: " + cutBeforeData( docAlc.getElementById("temp_min").text() )+"ºC";
-                textIncomeAlc += "   T.Max: " + cutBeforeData( docAlc.getElementById("temp_max").text() )+"ºC";
+                textIncomeAlc += "\n"+ "T.Min: " + cutNumericData( docAlc.getElementById("temp_min").text() )+"ºC";
+                textIncomeAlc += "   T.Max: " + cutNumericData( docAlc.getElementById("temp_max").text() )+"ºC";
 
 
             }catch( Exception e ){
@@ -341,24 +321,24 @@ public class Main2Activity extends AppCompatActivity {
                 Document docTor = c.get();
 
                 textIncomeTor = "El Toro";
-                textIncomeTor += "\n"+ "Humedad relativa: " + cutBeforeData( docTor.getElementById("hrel").text())+"%";
-                textIncomeTor += "   Viento: " + cutBeforeData( docTor.getElementById("vent").text())+"km/h";
-                textIncomeTor += "\n"+ "Hoy: " + cutBeforeData( docTor.getElementById("prec").text() )+"mm";
+                textIncomeTor += "\n"+ "Humedad relativa: " + cutNumericData( docTor.getElementById("hrel").text())+"%";
+                textIncomeTor += "   Viento: " + cutNumericData( docTor.getElementById("vent").text())+"km/h";
+                textIncomeTor += "\n"+ "Hoy: " + cutNumericData( docTor.getElementById("prec").text() )+"mm";
                 i=0;
                 for (Element e : docTor.getElementById("mesdades").children()) {
                     if (i == 5 ) {
-                        textIncomeTor += "   Mes: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeTor += "   Mes: "+  cutNumericData( e.text() )+"mm";
 
                     }else if (i==6){
-                        textIncomeTor += "   Año: "+  cutBeforeData( e.text() )+"mm";
+                        textIncomeTor += "   Año: "+  cutNumericData( e.text() )+"mm";
                         break;
                     }
                     i+=1;
                 }
 
 
-                textIncomeTor += "\n"+ "T.Min: " + cutBeforeData( docTor.getElementById("temp_min").text() )+"ºC";
-                textIncomeTor += "   T.Max: " + cutBeforeData( docTor.getElementById("temp_max").text() )+"ºC";
+                textIncomeTor += "\n"+ "T.Min: " + cutNumericData( docTor.getElementById("temp_min").text() )+"ºC";
+                textIncomeTor += "   T.Max: " + cutNumericData( docTor.getElementById("temp_max").text() )+"ºC";
 
 
             }catch( Exception e ){
@@ -375,24 +355,24 @@ public class Main2Activity extends AppCompatActivity {
                 Document docPue = c.get();
 
                 textIncomePue = "Puebla de San Miguel";
-                textIncomePue += "\n"+ "Humedad relativa: " + cutBeforeData( docPue.getElementById("hrel").text())+"%";
-                textIncomePue += "   Viento: " + cutBeforeData( docPue.getElementById("vent").text())+"km/h";
-                textIncomePue += "\n"+ "Hoy: " + cutBeforeData( docPue.getElementById("prec").text() )+"mm";
+                textIncomePue += "\n"+ "Humedad relativa: " + cutNumericData( docPue.getElementById("hrel").text())+"%";
+                textIncomePue += "   Viento: " + cutNumericData( docPue.getElementById("vent").text())+"km/h";
+                textIncomePue += "\n"+ "Hoy: " + cutNumericData( docPue.getElementById("prec").text() )+"mm";
                 i=0;
                 for (Element e : docPue.getElementById("mesdades").children()) {
                     if (i == 5 ) {
-                        textIncomePue += "   Mes: "+  cutBeforeData( e.text() )+"mm" ;
+                        textIncomePue += "   Mes: "+  cutNumericData( e.text() )+"mm" ;
 
                     }else if (i==6){
-                        textIncomePue += "   Año: "+  cutBeforeData( e.text() )+"mm" ;
+                        textIncomePue += "   Año: "+  cutNumericData( e.text() )+"mm" ;
                         break;
                     }
                     i+=1;
                 }
 
 
-                textIncomePue += "\n"+ "T.Min: " + cutBeforeData( docPue.getElementById("temp_min").text() )+"ºC";
-                textIncomePue += "   T.Max: " + cutBeforeData( docPue.getElementById("temp_max").text() )+"ºC";
+                textIncomePue += "\n"+ "T.Min: " + cutNumericData( docPue.getElementById("temp_min").text() )+"ºC";
+                textIncomePue += "   T.Max: " + cutNumericData( docPue.getElementById("temp_max").text() )+"ºC";
 
 
 
@@ -512,10 +492,10 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeBron = titulo;
                 textIncomeBron+= "\nViento: "+docBron.getElementById("WindAverage").text()+"km/h";
                 textIncomeBron+="\nHoy: "+docBron.getElementById("RainToday").text()+"mm";
-                textIncomeBron += "   Mes: "+oneDecimal(cutBeforeData(gFb.getMonthly().get(12).toString()))+"mm";
-                textIncomeBron += "   Año: "+oneDecimal(cutBeforeData(gFb.getAnnuals().get(12).toString()))+"mm";
-                textIncomeBron+= "\nT.Min: "+cutBeforeData(docBron.getElementsByClass("div-temp2").get(0).child(1).toString())+"ºC";
-                textIncomeBron+= "   T.Max: "+cutBeforeData(docBron.getElementsByClass("div-temp2").get(0).child(0).toString())+"ºC";
+                textIncomeBron += "   Mes: "+oneDecimal(gFb.getMonthly().get(12).toString())+"mm";
+                textIncomeBron += "   Año: "+oneDecimal(gFb.getAnnuals().get(12).toString())+"mm";
+                textIncomeBron+= "\nT.Min: "+ cutNumericData(docBron.getElementsByClass("div-temp2").get(0).child(1).toString())+"ºC";
+                textIncomeBron+= "   T.Max: "+ cutNumericData(docBron.getElementsByClass("div-temp2").get(0).child(0).toString())+"ºC";
 
                 }catch( Exception e ){
 
@@ -548,9 +528,9 @@ public class Main2Activity extends AppCompatActivity {
 
         }
 
-        public String cutBeforeData(String orgData){
+        public String cutNumericData(String orgData){
             Log.d("TRAZAorg",orgData.toString());
-            int start = 0, end = 0;
+            int start = -1, end = -1;
             for (int i=0;i<orgData.length();i++){
                 if (Character.isDigit(orgData.charAt(i))) {
                     start = i;
@@ -569,7 +549,7 @@ public class Main2Activity extends AppCompatActivity {
             // Contemplar temperaturas negativas
 
 
-            if (start != 0 && orgData.charAt(start-1) == '-'){
+            if (start != -1 && orgData.charAt(start-1) == '-'){
                 return orgData.substring(start-1,end+1);
 
             }
