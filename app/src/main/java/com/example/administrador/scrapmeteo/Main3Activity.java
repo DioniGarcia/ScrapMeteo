@@ -115,16 +115,7 @@ public class Main3Activity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             int i = 0;
-           /* for (String key : estaciones.keySet()){
-                if (isOnline2(key)) {
-                    Log.d(TAG, "STAT "+i+" IS WORKING");
 
-                } else {
-                    Log.d(TAG, "STAT "+i+" NOT WORKING");
-                }
-                i++;
-            }*/
-            //Toast.makeText(getApplicationContext()," PASSED!" ,Toast.LENGTH_LONG).show();
             textIncomeVista = "Vistabella: "+isOnline(estaciones.get(stats[0]));
             textIncomeXodos= "Xodos: "+isOnline(estaciones.get(stats[1]));
             textIncomeAtz= "Atzeneta: "+isOnline(estaciones.get(stats[2]));
@@ -183,7 +174,7 @@ public class Main3Activity extends AppCompatActivity {
         public String isOnline(String url){
             try {
                 Connection conn = Jsoup.connect(url);
-                conn.timeout(800);
+                conn.timeout(1500);
                 Document doc = conn.get();
             }
             catch (Exception e) {
