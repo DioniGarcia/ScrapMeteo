@@ -14,6 +14,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import java.util.ArrayList;
+
 public class Main2Activity extends AppCompatActivity {
     TextView texVista, texXodos, texAdz,texVf,texValde, texVm, texOnd, texAlc, texTor, texPue, texMos, texMon, texBron;
     Button but;
@@ -195,17 +197,8 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeVal += "\n"+ "Humedad relativa: " + cutNumericData( docVal.getElementById("hrel").text())+"%";
                 textIncomeVal += "   Viento: " + cutNumericData( docVal.getElementById("vent").text())+"km/h";
                 textIncomeVal += "\n"+ "Hoy: " + cutNumericData( docVal.getElementById("prec").text() )+"mm";
-                textIncomeVal += "   Mes: "+oneDecimal(gFb.getMonthly().get(4).toString())+"mm";
-                i=0;
-                for (Element e : docVal.getElementById("mesdades").children()) {
-                    if (i==6){
-                        textIncomeVal += "   Año: "+  cutNumericData( e.text() )+"mm";
-                        break;
-                    }
-                    i+=1;
-                }
-
-
+                textIncomeVal += "   Mes: "+formatRains(gFb.getMonthly().get(4).toString())+"mm";
+                textIncomeVal += "   Año: "+formatRains(gFb.getAnnuals().get(4).toString())+"mm";
                 textIncomeVal += "\n"+ "T.Min: " + cutNumericData( docVal.getElementById("temp_min").text() )+"ºC";
                 textIncomeVal += "   T.Max: " + cutNumericData( docVal.getElementById("temp_max").text() )+"ºC";
 
@@ -292,15 +285,8 @@ public class Main2Activity extends AppCompatActivity {
                 textIncomeAlc += "\n"+ "Humedad relativa: " + cutNumericData( docAlc.getElementById("hrel").text())+"%";
                 textIncomeAlc += "   Viento: " + cutNumericData( docAlc.getElementById("vent").text())+"km/h";
                 textIncomeAlc += "\n"+ "Hoy: " + cutNumericData( docAlc.getElementById("prec").text() )+"mm";
-                textIncomeAlc +="   Mes: "+oneDecimal(gFb.getMonthly().get(7).toString())+"mm";
-                i=0;
-                for (Element e : docAlc.getElementById("mesdades").children()) {
-                    if (i==6){
-                        textIncomeAlc += "   Año: "+  cutNumericData( e.text() )+"mm";
-                        break;
-                    }
-                    i+=1;
-                }
+                textIncomeAlc +="   Mes: "+formatRains(gFb.getMonthly().get(7).toString())+"mm";
+                textIncomeAlc += "   Año: "+ formatRains(gFb.getAnnuals().get(7).toString())+"mm";
 
 
                 textIncomeAlc += "\n"+ "T.Min: " + cutNumericData( docAlc.getElementById("temp_min").text() )+"ºC";
@@ -390,23 +376,29 @@ public class Main2Activity extends AppCompatActivity {
 
                 try{
 
-                Connection c = Jsoup.connect("http://www.aemet.es/va/eltiempo/observacion/ultimosdatos?k=val&l=8489X&w=1&datos=img");
+                Connection c = Jsoup.connect("https://www.avamet.org/mxo_i.php?id=c02m129e02");
                 c.timeout(timeout);
                 Document docVf = c.get();
 
                 textIncomeVf = "Villafranca del cid";
 
-                for(Element e : docVf.getElementsByClass("fila_impar")){
-                    meteo[idx] = e.text();
-                    idx+=1;
-                }
-                textIncomeVf+= "\nViento: "+meteo[3].split(" ")[0]+"km/h";
-                textIncomeVf+="\nHoy: "+meteo[4]+"mm";
-                textIncomeVf += "   Mes: "+oneDecimal(gFb.getMonthly().get(3).toString())+"mm";
-                textIncomeVf += "   Año: "+ oneDecimal(gFb.getAnnuals().get(3).toString())+"mm";
-                textIncomeVf+="\nT.Min: "+meteo[1].split(" ")[0]+"ºC";
-                textIncomeVf+="   T.Max: "+meteo[0].split(" ")[0]+"ºC";
+                textIncomeVf += "\n"+ "Humedad relativa: " + cutNumericData( docVf.getElementById("hrel").text())+"%";
+                textIncomeVf += "   Viento: " + cutNumericData( docVf.getElementById("vent").text())+"km/h";
+                textIncomeVf += "\n"+ "Hoy: " + cutNumericData( docVf.getElementById("prec").text() )+"mm";
+                i=0;
+                for (Element e : docVf.getElementById("mesdades").children()) {
+                    if (i == 5 ) {
+                        textIncomeVf += "   Mes: "+  cutNumericData( e.text() )+"mm" ;
 
+                    }else if (i==6){
+                        textIncomeVf += "   Año: "+  cutNumericData( e.text() )+"mm" ;
+                        break;
+                    }
+                    i+=1;
+                }
+
+                textIncomeVf += "\n"+ "T.Min: " + cutNumericData( docVf.getElementById("temp_min").text() )+"ºC";
+                textIncomeVf += "   T.Max: " + cutNumericData( docVf.getElementById("temp_max").text() )+"ºC";
 
                 }catch( Exception e ){
 
@@ -432,10 +424,26 @@ public class Main2Activity extends AppCompatActivity {
                     meteo[idx] = e.text();
                     idx+=1;
                 }
-                textIncomeMos+= "\nViento: "+meteo[3].split(" ")[0]+"km/h";
-                textIncomeMos+="\nHoy: "+meteo[4]+"mm";
-                textIncomeMos += "   Mes: "+oneDecimal(gFb.getMonthly().get(10).toString())+"mm";
-                textIncomeMos += "   Año: "+ oneDecimal(gFb.getAnnuals().get(10).toString())+"mm";
+
+                Connection c2 = Jsoup.connect("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=arn&l=8486X&w=0&datos=det");
+                c2.timeout(timeout);
+                Document mosHum = c2.get();
+
+                String humedad = "";
+                ArrayList<Element> aE = mosHum.getElementById("table").child(1).children();
+
+                for(Element e : aE){
+                    if (e.children().size() == 10){
+                        humedad = e.children().get(9).text();
+                    }
+                    break;
+                }
+
+                textIncomeMos +="\nHumedad relativa: "+humedad+"%";
+                textIncomeMos+= "   Viento: "+meteo[3].split(" ")[0]+"km/h";
+                textIncomeMos+="\nHoy: "+formatRains(meteo[4])+"mm";
+                textIncomeMos += "   Mes: "+formatRains(gFb.getMonthly().get(10).toString())+"mm";
+                textIncomeMos += "   Año: "+ formatRains(gFb.getAnnuals().get(10).toString())+"mm";
                 textIncomeMos+="\nT.Min: "+meteo[1].split(" ")[0]+"ºC";
                 textIncomeMos+="   T.Max: "+meteo[0].split(" ")[0]+"ºC";
 
@@ -464,10 +472,26 @@ public class Main2Activity extends AppCompatActivity {
                     meteo[idx] = e.text();
                     idx+=1;
                 }
-                textIncomeMon+= "\nViento: "+meteo[3].split(" ")[0]+"km/h";
-                textIncomeMon+="\nHoy: "+meteo[4]+"mm";
-                textIncomeMon += "   Mes: "+oneDecimal(gFb.getMonthly().get(11).toString())+"mm";
-                textIncomeMon += "   Año: "+oneDecimal(gFb.getAnnuals().get(11).toString())+"mm";
+
+                Connection c2 = Jsoup.connect("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=val&l=8472A&w=0&datos=det");
+                c2.timeout(timeout);
+                Document monHum = c2.get();
+
+                String humedad = "";
+                ArrayList<Element> aE = monHum.getElementById("table").child(1).children();
+
+                for(Element e : aE){
+                    if (e.children().size() == 10){
+                        humedad = e.children().get(9).text();
+                    }
+                    break;
+                }
+
+                textIncomeMon +="\nHumedad relativa: "+humedad+"%";
+                textIncomeMon+= "   Viento: "+meteo[3].split(" ")[0]+"km/h";
+                textIncomeMon+="\nHoy: "+formatRains(meteo[4])+"mm";
+                textIncomeMon += "   Mes: "+formatRains(gFb.getMonthly().get(11).toString())+"mm";
+                textIncomeMon += "   Año: "+formatRains(gFb.getAnnuals().get(11).toString())+"mm";
                 textIncomeMon+="\nT.Min: "+meteo[1].split(" ")[0]+"ºC";
                 textIncomeMon+="   T.Max: "+meteo[0].split(" ")[0]+"ºC";
 
@@ -490,10 +514,11 @@ public class Main2Activity extends AppCompatActivity {
 
                 titulo = "Bronchales (Camping)";
                 textIncomeBron = titulo;
-                textIncomeBron+= "\nViento: "+docBron.getElementById("WindAverage").text()+"km/h";
+                textIncomeBron +="\nHumedad relativa: " + docBron.getElementById("OutdoorHum").text()+"%";
+                textIncomeBron+= "   Viento: "+cutNumericData(docBron.getElementsByClass("caja-temperatura").get(0).child(4).text())+"km/h";
                 textIncomeBron+="\nHoy: "+docBron.getElementById("RainToday").text()+"mm";
-                textIncomeBron += "   Mes: "+oneDecimal(gFb.getMonthly().get(12).toString())+"mm";
-                textIncomeBron += "   Año: "+oneDecimal(gFb.getAnnuals().get(12).toString())+"mm";
+                textIncomeBron += "   Mes: "+formatRains(gFb.getMonthly().get(12).toString())+"mm";
+                textIncomeBron += "   Año: "+formatRains(gFb.getAnnuals().get(12).toString())+"mm";
                 textIncomeBron+= "\nT.Min: "+ cutNumericData(docBron.getElementsByClass("div-temp2").get(0).child(1).toString())+"ºC";
                 textIncomeBron+= "   T.Max: "+ cutNumericData(docBron.getElementsByClass("div-temp2").get(0).child(0).toString())+"ºC";
 
@@ -529,12 +554,11 @@ public class Main2Activity extends AppCompatActivity {
         }
 
         public String cutNumericData(String orgData){
-            Log.d("TRAZAorg",orgData.toString());
             int start = -1, end = -1;
+            orgData = orgData.trim();
             for (int i=0;i<orgData.length();i++){
                 if (Character.isDigit(orgData.charAt(i))) {
                     start = i;
-                    Log.d("TRAZAstart",Integer.toString(i));
                     break;
                 }
             }
@@ -542,7 +566,6 @@ public class Main2Activity extends AppCompatActivity {
 
                 if(Character.isDigit(orgData.charAt(i))){
                     end = i;
-                    Log.d("TRAZAend",Integer.toString(i));
                     break;
                 }
             }
@@ -560,6 +583,30 @@ public class Main2Activity extends AppCompatActivity {
         public String oneDecimal(String cipher){
             int idxPoint = cipher.indexOf('.');
             return cipher.substring(0,idxPoint+2);
+        }
+
+        public Double formatRains(String orgData){
+            Double result;
+
+            // Coger el índice sobre el primer caracter que sea un valor numérico
+            int idx = 0;
+            for (int i=0;i<orgData.length();i++){
+                if (Character.isDigit(orgData.charAt(i))) {
+                    idx = i;
+                    break;
+                }
+            }
+
+            try{
+                orgData=orgData.replace(',','.');
+                int pointIdx = orgData.indexOf('.');
+                orgData=orgData.substring(idx,pointIdx+2);
+                result = Double.parseDouble(orgData);
+
+            }catch( NumberFormatException e){
+                return 0.0;
+            }
+            return result;
         }
 
     }

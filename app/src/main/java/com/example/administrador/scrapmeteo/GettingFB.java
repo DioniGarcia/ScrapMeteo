@@ -65,10 +65,15 @@ public class GettingFB {
                         // fill anuals
                         for(int stat=0; stat<= 12; stat++){
                             ad =(ArrayList<Double>) rains.get("E"+Integer.toString(stat));
+
+                            Log.d(TAG,"E"+stat+" twe: "+ad.toString());
+
                             Double total = 0.0;
                             for (Double numb : ad){
+                                Log.d(TAG,"Aqui twe: "+ad.toString());
                                 total+=numb;
                             }
+                            Log.d(TAG,"twe WE: "+ad.toString());
                             anuals.add(stat, total);
                             monthly.add(stat, ad.get(month));
                         }
