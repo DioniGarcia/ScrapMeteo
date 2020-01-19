@@ -11,7 +11,7 @@
     android:paddingRight="15dp"
     android:paddingBottom="15dp"
 
-    tools:context=".Main2Activity">
+    tools:context=".Main3Activity">
 
     <Space
         android:layout_width="match_parent"
@@ -47,7 +47,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="464dp">
 
         <LinearLayout
             android:id="@+id/ll"
@@ -214,5 +214,18 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/resetDb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ResetDb"
+            android:onClick="btn_showDialog"/>
+    </LinearLayout>
 
 </LinearLayout>

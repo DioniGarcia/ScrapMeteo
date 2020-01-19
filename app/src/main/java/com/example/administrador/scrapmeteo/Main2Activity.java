@@ -61,6 +61,8 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
+
+
     public class doit extends AsyncTask<Void,Void,Void>{
 
         String textIncomeVista = "VIstabella - NOT WORKING - AVAMET";
@@ -81,7 +83,7 @@ public class Main2Activity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            int timeout = 2000;
+            int timeout = 5000;
             int i = 0;
             String titulo="";
 

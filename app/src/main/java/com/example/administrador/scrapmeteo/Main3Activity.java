@@ -2,13 +2,20 @@ package com.example.administrador.scrapmeteo;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -37,7 +44,14 @@ import org.jsoup.nodes.Element;
 public class Main3Activity extends AppCompatActivity {
     TextView texVista, texXodos, texAdz,texVf,texValde, texVm, texOnd, texAlc, texTor, texPue, texMos, texMon, texBron;
     Button but;
+    Button but2;
+
+    TextView txt_dummy;
+
     private static final String TAG = "Main3Activity";
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     private Map<String,String> estaciones = new HashMap<>();
 
@@ -45,9 +59,15 @@ public class Main3Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main3);
+
+
+        txt_dummy = (TextView) findViewById(R.id.txt_input);
+
+
 
         texVista = (TextView) findViewById(R.id.t1);
         texXodos = (TextView) findViewById(R.id.t2);
@@ -80,6 +100,8 @@ public class Main3Activity extends AppCompatActivity {
 
 
         but = (Button) findViewById(R.id.b1);
+        but2= (Button)findViewById(R.id.resetDb);
+
 
         but.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +114,74 @@ public class Main3Activity extends AppCompatActivity {
         new doit().execute();
 
     }
+
+    public void btn_showDialog(View view){
+        final AlertDialog.Builder alert = new AlertDialog.Builder(Main3Activity.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_pass,null);
+
+        final EditText txt_inputText = (EditText)mView.findViewById(R.id.txt_input);
+
+        Button btn_cancel = (Button) mView.findViewById(R.id.btn_cancel);
+        Button btn_ok = (Button)mView.findViewById(R.id.btn_ok);
+
+        alert.setView(mView);
+
+        final AlertDialog alertDialog = alert.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                if (txt_inputText.getText().toString().trim().equals("5881")){
+
+                    Toast.makeText(getApplicationContext(),"DELETING OK" ,Toast.LENGTH_LONG).show();
+                    resetDB();
+                }else{
+                    Toast.makeText(getApplicationContext(),"You're not ROOT!" ,Toast.LENGTH_LONG).show();
+                }
+                txt_inputText.setText("");
+                alertDialog.dismiss();
+
+            }
+        });
+
+        alertDialog.show();
+    }
+
+    private void resetDB(){
+        ArrayList<Double> aF= new ArrayList<>(Collections.nCopies(12, 0.1));
+        Map<String,Object> tempz = new HashMap<>();
+        for (int i=0; i<13; i++) {
+            tempz.put("E"+Integer.toString(i), aF);
+
+        }
+
+        db.collection("Lluvias").document("Estaciones").set(tempz)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(Main3Activity.this, "ARRAY GUARDADO", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Main3Activity.this, "Error GUARDANDO!", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+
+    }
+
 
     public class doit extends AsyncTask<Void,Void,Void>{
 
@@ -159,7 +249,7 @@ public class Main3Activity extends AppCompatActivity {
         public String isOnline(String url){
             try {
                 Connection conn = Jsoup.connect(url);
-                conn.timeout(1500);
+                conn.timeout(5000);
                 Document doc = conn.get();
             }
             catch (Exception e) {
@@ -168,5 +258,7 @@ public class Main3Activity extends AppCompatActivity {
             }
             return "WORKING OK!";
         }
+
+
     }
 }
